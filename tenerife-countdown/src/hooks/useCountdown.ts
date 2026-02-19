@@ -5,31 +5,31 @@ import { useState, useEffect } from 'react';
 const TARGET = new Date('2026-06-15T09:00:00Z').getTime();
 
 interface TimeLeft {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-  isOver: boolean;
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+    isOver: boolean;
 }
 
 function compute(): TimeLeft {
-  const diff = Math.max(0, TARGET - Date.now());
-  const isOver = diff === 0;
-  const totalSeconds = Math.floor(diff / 1000);
-  const days = Math.floor(totalSeconds / 86400);
-  const hours = Math.floor((totalSeconds % 86400) / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-  return { days, hours, minutes, seconds, isOver };
+    const diff = Math.max(0, TARGET - Date.now());
+    const isOver = diff === 0;
+    const totalSeconds = Math.floor(diff / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    return { days, hours, minutes, seconds, isOver };
 }
 
 export function useCountdown(): TimeLeft {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(compute);
+    const [timeLeft, setTimeLeft] = useState<TimeLeft>(compute);
 
-  useEffect(() => {
-    const id = setInterval(() => setTimeLeft(compute()), 1000);
-    return () => clearInterval(id);
-  }, []);
+    useEffect(() => {
+        const id = setInterval(() => setTimeLeft(compute()), 1000);
+        return () => clearInterval(id);
+    }, []);
 
-  return timeLeft;
+    return timeLeft;
 }
