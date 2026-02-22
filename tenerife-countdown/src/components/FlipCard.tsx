@@ -25,24 +25,20 @@ export function FlipCard({ digit }: FlipCardProps) {
     }, [digit]);
 
     return (
-        <div className="relative w-[3.25rem] h-[4.5rem] md:w-[5rem] md:h-[7rem] perspective-500 select-none">
-            {/* Static bottom half — shows "next" value (revealed after flip) */}
+        <div className="relative w-[2.25rem] h-[3.25rem] sm:w-[3.25rem] sm:h-[4.5rem] md:w-[5rem] md:h-[7rem] perspective-500 select-none">
             <div className="absolute inset-0 flex flex-col overflow-hidden">
-                {/* Top static face (shows current top half) */}
                 <div className="flex-1 flex items-end justify-center bg-flip-dark rounded-t-md overflow-hidden border-b border-black/40">
-                    <span className="text-sunshine-400 font-black text-4xl md:text-6xl leading-none pb-0.5 translate-y-1/2">
+                    <span className="text-sunshine-400 font-black text-2xl sm:text-4xl md:text-6xl leading-none pb-0.5 translate-y-1/2">
                         {current}
                     </span>
                 </div>
-                {/* Bottom static face (shows next bottom half) */}
                 <div className="flex-1 flex items-start justify-center bg-flip-mid rounded-b-md overflow-hidden">
-                    <span className="text-sunshine-400 font-black text-4xl md:text-6xl leading-none pt-0.5 -translate-y-1/2">
+                    <span className="text-sunshine-400 font-black text-2xl sm:text-4xl md:text-6xl leading-none pt-0.5 -translate-y-1/2">
                         {flipping ? next : current}
                     </span>
                 </div>
             </div>
 
-            {/* Flip flap — top half, rotates down */}
             {flipping && (
                 <div
                     className="absolute inset-x-0 top-0 h-1/2 bg-flip-dark rounded-t-md overflow-hidden origin-bottom"
@@ -53,7 +49,7 @@ export function FlipCard({ digit }: FlipCardProps) {
                     }}
                 >
                     <div className="w-full h-full flex items-end justify-center">
-                        <span className="text-sunshine-400 font-black text-4xl md:text-6xl leading-none pb-0.5 translate-y-1/2">
+                        <span className="text-sunshine-400 font-black text-2xl sm:text-4xl md:text-6xl leading-none pb-0.5 translate-y-1/2">
                             {current}
                         </span>
                     </div>
@@ -70,14 +66,13 @@ export function FlipCard({ digit }: FlipCardProps) {
                     }}
                 >
                     <div className="w-full h-full flex items-start justify-center">
-                        <span className="text-sunshine-400 font-black text-4xl md:text-6xl leading-none pt-0.5 -translate-y-1/2">
+                        <span className="text-sunshine-400 font-black text-2xl sm:text-4xl md:text-6xl leading-none pt-0.5 -translate-y-1/2">
                             {next}
                         </span>
                     </div>
                 </div>
             )}
 
-            {/* Centre shadow line */}
             <div className="absolute inset-x-0 top-1/2 h-[2px] bg-black/60 z-20 -translate-y-px" />
         </div>
     );
