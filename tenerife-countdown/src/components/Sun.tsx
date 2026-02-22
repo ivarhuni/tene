@@ -3,7 +3,7 @@ import kidPng from '../assets/kid.png';
 
 const RAY_COUNT = 12;
 const RAY_LENGTH = 69;
-const RAY_START = 103.5; // distance from center where ray starts (×1.15)
+const RAY_START = 103.5;
 
 export function Sun() {
     const rays = Array.from({ length: RAY_COUNT }, (_, i) => {
@@ -17,13 +17,10 @@ export function Sun() {
     });
 
     return (
-        <div className="relative flex items-center justify-center">
-            {/* Outer glow ring — scaled ×1.15: 280→322 */}
+        <div className="relative flex items-center justify-center w-[180px] h-[180px] sm:w-[260px] sm:h-[260px] md:w-[391px] md:h-[391px]">
             <motion.div
-                className="absolute rounded-full"
+                className="absolute rounded-full w-[160px] h-[160px] sm:w-[230px] sm:h-[230px] md:w-[322px] md:h-[322px]"
                 style={{
-                    width: 322,
-                    height: 322,
                     background:
                         'radial-gradient(circle, rgba(255,215,0,0.35) 0%, rgba(255,165,0,0.15) 50%, transparent 70%)',
                 }}
@@ -31,21 +28,18 @@ export function Sun() {
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             />
 
-            {/* SVG canvas scaled ×1.15: 340→391, viewBox -195.5 */}
-            <svg width={391} height={391} viewBox="-195.5 -195.5 391 391" overflow="visible">
+            <svg className="w-full h-full" viewBox="-195.5 -195.5 391 391" overflow="visible">
                 <defs>
                     <radialGradient id="sunGradient" cx="40%" cy="35%" r="60%">
                         <stop offset="0%" stopColor="#FFE566" />
                         <stop offset="50%" stopColor="#FFD700" />
                         <stop offset="100%" stopColor="#FF8C00" />
                     </radialGradient>
-                    {/* Clip circle for kid photo: 70% of sun radius 92 ≈ 64 */}
                     <clipPath id="kidClip">
                         <circle cx={0} cy={0} r={64} />
                     </clipPath>
                 </defs>
 
-                {/* Rotating rays */}
                 <motion.g
                     animate={{ rotate: 360 }}
                     transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
@@ -67,7 +61,6 @@ export function Sun() {
                     ))}
                 </motion.g>
 
-                {/* Sun body — radius scaled ×1.15: 80→92 */}
                 <motion.circle
                     cx={0}
                     cy={0}
@@ -78,7 +71,6 @@ export function Sun() {
                     transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                 />
 
-                {/* Kid photo centred in sun, clipped to circle */}
                 <image
                     href={kidPng}
                     x={-64}
@@ -89,7 +81,6 @@ export function Sun() {
                     preserveAspectRatio="xMidYMid slice"
                 />
 
-                {/* Sun face shine highlight — scaled ×1.15: r 30→34.5 */}
                 <circle cx={-23} cy={-23} r={34.5} fill="rgba(255,255,255,0.10)" />
             </svg>
         </div>
